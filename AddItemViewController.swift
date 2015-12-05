@@ -8,10 +8,11 @@
 
 import UIKit
 
-class AddItemViewController: UIViewController, UITextFieldDelegate {
+class AddItemViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var doneBtn: UIBarButtonItem!
     @IBOutlet weak var idTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     
     var item:Item?;
     
@@ -33,7 +34,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (sender === doneBtn) {
             if let id = Int(idTextField.text ?? "") {
-                item = Item(id: id);
+                item = Item(id: id, name: nameTextField.text != "" ? nameTextField.text : nil);
             }
         }
     }

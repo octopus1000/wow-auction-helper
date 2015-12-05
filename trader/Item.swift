@@ -22,7 +22,8 @@ class Item: NSObject, NSCoding{
     
     
     struct PropertyKey {
-        static let idKey = "id"
+        static let idKey = "id";
+        static let nameKey = "name"
     }
     
     // MARK: Initialization
@@ -44,11 +45,13 @@ class Item: NSObject, NSCoding{
     // MARK: NSCoding
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeInteger(id, forKey: PropertyKey.idKey);
+        aCoder.encodeObject(name, forKey: PropertyKey.nameKey);
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         let id = aDecoder.decodeIntegerForKey(PropertyKey.idKey);
-        self.init(id: id);
+        let name = aDecoder.decodeObjectForKey(PropertyKey.nameKey) as? String;
+        self.init(id: id, name: name);
     }
 
 }
